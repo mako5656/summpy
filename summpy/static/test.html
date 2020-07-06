@@ -4,11 +4,23 @@
   </head>
   <body>
     <textarea type="text" name="text" rows="7" cols="70"></textarea>
-    <br>
-    algorithm (lexrank|clexrank|divrank|mcp): <input type="text" value="lexrank" name="algo"/><br>
-    length (the number of sentences): <input type="text" value="" name="sent_limit"/><br>
-    length (the number of chars): <input type="text" value="" name="char_limit"/><br>
-    cumulative LexRank score: <input type="text" value="" name="imp_require"/><br>
+    
+    <p>アルゴリズムの選択</p>
+    <div>
+      <input type="radio" name="algo" value="lexrank">lexrank
+      <input type="radio" name="algo" value="clexrank">clexrank 
+      <input type="radio" name="algo" value="divrank">divrank
+      <input type="radio" name="algo" value="mcp">mcp
+    </div><br>
+
+    <p>要約の行数</p>
+    <input type="number" value="" min="0" name="sent_limit"/><br><br>
+
+    <p>文字数の指定</p>
+    <input type="number" value="" min="0" name="char_limit"/>文字以下<br><br>
+
+    <p>要約率の指定(指定の付近の要約率が出力される)</p>
+     <input type="text" value="" name="imp_require"/><br><br>
     <button id="summarize">summarize</button>
     <br>
     <div id="out"></div>
@@ -20,7 +32,7 @@ $(document).ready(function() {
     var text = $("textarea[name='text']").val();
     var params = {
       text: text,
-      algo: $("input[name='algo']").val(),
+      algo: $("input[name='algo']:checked").val(),
       sent_limit: $("input[name='sent_limit']").val(),
       char_limit: $("input[name='char_limit']").val(),
       imp_require: $("input[name='imp_require']").val(),
